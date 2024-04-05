@@ -1,0 +1,22 @@
+{
+  "name": "node-password-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.4",
+    "@webpack-cli/generators": "^3.0.7",
+    "prettier": "^3.2.5",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.4",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "workbox-webpack-plugin": "^7.0.0"
+  }
+}
