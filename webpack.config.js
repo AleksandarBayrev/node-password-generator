@@ -11,6 +11,7 @@ const config = {
     target: 'node',
     output: {
         path: path.resolve(__dirname, 'dist'),
+        filename: 'npg.js'
     },
     plugins: [
         // Add your plugins here
