@@ -1,20 +1,22 @@
-import fs from "fs/promises";
-import path from "path";
-import { getSymbol } from "./getSymbol";
-
+import { getConfig } from "./getConfig";
+import { generatePassword } from "./generatePassword";
+import { IPasswordStorage } from "./IPasswordStorage";
+import { PasswordStorage } from "./PasswordStorage";
 (async () => {
     try {
-        const config = JSON.parse((await fs.readFile(path.join(__dirname, "config.json"))).toString());
-        const result = [];
-        if (config.length <= 0) {
-            console.log("Invalid configuration, length should be different than 0");
-            return;
+        const config = await getConfig();
+        const passwordStorage: IPasswordStorage = new PasswordStorage(config);
+        for (let i = 0; i < config.numberOfPasswords; i++) {
+            const result = generatePassword(config);
+            passwordStorage.tryAddPassword(result);
+            console.log(`Generated password: ${result}`);
         }
-        for (let i = 0; i < config.length; i++) {
-            result.push(getSymbol());
+        const saveResult = await passwordStorage.trySaveToFile();
+        if (saveResult.saved) {
+            console.log(`Passwords saved to file: ${saveResult.filename}`);
         }
-        console.log(`Generated password: ${result.join("")}`);
     } catch (err) {
-        console.log(`config.json not found in current directory!`);
+        const castedError = err as Error;
+        console.log(castedError.message);
     }
 })();

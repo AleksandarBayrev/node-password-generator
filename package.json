@@ -1,8 +1,8 @@
 {
   "name": "node-password-generator",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Node.JS password generator",
+  "main": "npg.js",
   "scripts": {
     "build": "npm run bundle && npm run copy-config",
     "bundle": "webpack --config webpack.config.js",
