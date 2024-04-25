@@ -1,6 +1,6 @@
 import path from "path";
 import { IPasswordStorage } from "./IPasswordStorage";
-import { Config, SaveResult } from "./types";
+import { Config, SaveResult, StorageType } from "./types";
 import fs from "fs";
 
 export class PasswordStorage implements IPasswordStorage {
@@ -13,12 +13,12 @@ export class PasswordStorage implements IPasswordStorage {
         this.filename = this.generateFilename();
     }
     tryAddPassword(password: string): void {
-        if (this.config.saveToFile) {
+        if (this.config.storageType !== StorageType.ConsoleOnly) {
             this.passwords.push(password);
         }
     }
     async trySaveToFile(): Promise<SaveResult> {
-        if (this.config.saveToFile) {
+        if (this.config.storageType !== StorageType.ConsoleOnly) {
             fs.writeFileSync(this.filename, this.passwords.join("\n"));
             return {
                 saved: await fs.existsSync(path.join(__dirname, this.filename)),
