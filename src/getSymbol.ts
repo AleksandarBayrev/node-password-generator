@@ -16,6 +16,10 @@ const possibleSymbols = [
     "^"
 ];
 
+for (let i = 0; i < 10; i++) {
+    possibleSymbols.push(i.toString());
+}
+
 for (let i  = 65; i <= 90; i++) {
     possibleSymbols.push(String.fromCharCode(i));
 }
