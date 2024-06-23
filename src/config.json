@@ -11,5 +11,8 @@
         "=",
         ":",
         "^"
-    ]
+    ],
+    "useNumbers": true,
+    "useCapitalLetters": true,
+    "useLowercaseLetters": true
 }

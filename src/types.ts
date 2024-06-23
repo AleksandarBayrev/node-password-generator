@@ -3,6 +3,9 @@ export type Config = {
     numberOfPasswords: number;
     storageType: StorageType;
     possibleSymbols: string[];
+    useNumbers: boolean;
+    useCapitalLetters: boolean;
+    useLowercaseLetters: boolean;
 }
 export type SaveResult = {
     saved: boolean;

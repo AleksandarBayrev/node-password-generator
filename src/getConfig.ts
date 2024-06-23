@@ -2,10 +2,14 @@ import { Config, GetConfigFunction, StorageType } from "./types";
 import fs from "fs/promises";
 import path from "path";
 
-const baseConfig: Config = Object.freeze({
+const baseConfig: Config = Object.freeze<Config>({
     length: 0,
     storageType: StorageType.ConsoleOnly,
-    numberOfPasswords: 0
+    numberOfPasswords: 0,
+    possibleSymbols: [],
+    useNumbers: true,
+    useCapitalLetters: true,
+    useLowercaseLetters: true
 });
 
 export const getConfig: GetConfigFunction = async () => {
