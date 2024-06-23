@@ -2,6 +2,7 @@ export type Config = {
     length: number;
     numberOfPasswords: number;
     storageType: StorageType;
+    possibleSymbols: string[];
 }
 export type SaveResult = {
     saved: boolean;

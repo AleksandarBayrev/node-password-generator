@@ -1,20 +1,12 @@
+import { workerData } from "worker_threads";
+
 const getRandomIntInclusive = (min: number, max: number) => {
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
 }
 
-const possibleSymbols = [
-    "!",
-    "#",
-    "$",
-    "_",
-    "-",
-    ".",
-    "=",
-    ":",
-    "^"
-];
+const possibleSymbols = JSON.parse(workerData.config)?.possibleSymbols ?? [];
 
 for (let i = 0; i < 10; i++) {
     possibleSymbols.push(i.toString());

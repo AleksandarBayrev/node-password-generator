@@ -1,5 +1,15 @@
 {
     "length": 0,
     "numberOfPasswords": 0,
-    "storageType": 0
+    "storageType": 0,
+    "possibleSymbols": [
+        "!",
+        "#",
+        "$",
+        "_",
+        "-",
+        "=",
+        ":",
+        "^"
+    ]
 }
