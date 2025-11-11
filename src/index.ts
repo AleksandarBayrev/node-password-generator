@@ -7,24 +7,27 @@ import { StorageType } from "./types";
     try {
         const config = await getConfig();
         const passwordStorage: IPasswordStorage = new PasswordStorage(config);
-        const passwords: Promise<string>[] = [];
+        const passwords: string[] = [];
         const startDate = new Date();
         const mode = Object.keys(StorageType).find((x: string) => StorageType[x as any] === config.storageType as any);
+
         console.log(`Started generating passwords at ${startDate.toLocaleDateString()} ${startDate.toLocaleTimeString()} in mode = ${mode}`);
+
         for (let i = 0; i < config.numberOfPasswords; i++) {
-            passwords.push(generatePassword(config));
+            passwords.push(await generatePassword(config));
         }
-        const generatedPasswords = await Promise.all(passwords);
-        for (let i = 0; i < generatedPasswords.length; i++) {
-            const password = generatedPasswords[i];
+
+        for (let i = 0; i < passwords.length; i++) {
+            const password = passwords[i];
+
             passwordStorage.tryAddPassword(password);
-            if (config.storageType !== StorageType.FileOnly) {
-                console.log(`Generated password: ${password}`);
-            }
         }
+
         const saveResult = await passwordStorage.trySaveToFile();
         const endDate = new Date();
+
         console.log(`Time taken = ${endDate.getTime() - startDate.getTime()}ms`);
+
         if (saveResult.saved) {
             console.log(`Passwords saved to file: ${saveResult.filename}`);
         }

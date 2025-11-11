@@ -28,6 +28,7 @@ if (config?.useLowercaseLetters) {
         possibleSymbols.push(String.fromCharCode(i));
     }
 }
+
 export const getSymbol = () => {
     return possibleSymbols[getRandomIntInclusive(0, possibleSymbols.length - 1)];
 }

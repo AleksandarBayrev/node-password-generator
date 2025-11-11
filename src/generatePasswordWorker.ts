@@ -5,5 +5,6 @@ import { getSymbol } from "./getSymbol";
         console.error("Script should not be called directly, or incorrect usage!");
         return;
     }
+
     parentPort.postMessage({symbol: getSymbol()});
 })();

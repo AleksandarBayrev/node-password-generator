@@ -14,7 +14,7 @@ const getSymbol = (config: Config): Promise<string> => {
         worker.on("exit", () => {
             res(symbol);
         });
-    })
+    });
 }
 
 export const generatePassword = async (config: Config) => {
@@ -24,5 +24,10 @@ export const generatePassword = async (config: Config) => {
         result.push(getSymbol(config));
     }
 
-    return (await Promise.all(result)).join("");
+    const passwordAsArray: string[] = await Promise.all(result);
+    const passwordAsString: string = passwordAsArray.join("");
+
+    console.log(`Generated password: ${passwordAsString}`);
+
+    return passwordAsString;
 }
