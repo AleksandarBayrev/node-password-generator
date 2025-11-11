@@ -1,5 +1,12 @@
-import { Config } from "./types";
+import { Config, StorageType } from "./types";
 import { Worker } from "worker_threads";
+
+const consoleLogEnabled = [StorageType.ConsoleOnly, StorageType.FileAndConsole];
+
+const shouldPrintToConsole = (config: Config): boolean => {
+    return consoleLogEnabled.includes(config.storageType);
+}
+
 const getSymbol = (config: Config): Promise<string> => {
     return new Promise((res, rej) => {
         const worker = new Worker("./generatePasswordWorker", {
@@ -27,7 +34,9 @@ export const generatePassword = async (config: Config) => {
     const passwordAsArray: string[] = await Promise.all(result);
     const passwordAsString: string = passwordAsArray.join("");
 
-    console.log(`Generated password: ${passwordAsString}`);
+    if (shouldPrintToConsole(config)) {
+        console.log(`Generated password: ${passwordAsString}`);
+    }
 
     return passwordAsString;
 }
