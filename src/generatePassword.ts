@@ -16,10 +16,13 @@ const getSymbol = (config: Config): Promise<string> => {
         });
     })
 }
+
 export const generatePassword = async (config: Config) => {
-    const result: string[] = [];
+    const result: Promise<string>[] = [];
+
     for (let i = 0; i < config.length; i++) {
-        result.push(await getSymbol(config));
+        result.push(getSymbol(config));
     }
-    return result.join("");
+
+    return (await Promise.all(result)).join("");
 }
